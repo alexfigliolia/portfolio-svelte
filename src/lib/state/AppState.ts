@@ -49,8 +49,8 @@ export class AppState {
 		this.defer(() => {
 			flipController.update(() => "flip-controller shrink")
 			this.defer(() => {
-				loading.update(() => true);
 				flipController.update(() => "flip-controller shrink flip-active");
+				loading.update(() => true);
 				this.defer(async () => {
 					await loader();
 					this.defer(() => {

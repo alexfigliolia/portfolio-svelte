@@ -106,7 +106,7 @@
     background-color: #fff;
     @include variables.center;
     opacity: 0;
-    animation: opacity 0.5s forwards;
+    animation: opacity 0.25s 1s forwards;
     perspective: 1000px;
     transform-style: preserve-3d;
     position: fixed;
