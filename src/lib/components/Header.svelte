@@ -27,15 +27,11 @@
     position: fixed;
     top: 0;
     left: 0;
-    height: 50px;
     width: 100%;
     @include variables.center;
     backface-visibility: hidden;
     z-index: 543232545;
     transform: translate3d(0, 0, 2px);
-    @media #{variables.$mq-670} {
-      height: 80px;
-    }
     & > div {
       @include variables.center;
       justify-content: space-between;
@@ -48,13 +44,15 @@
         border: none;
         background-color: transparent;
         box-shadow: none;
+        margin: 0;
+        padding: 0;
         & > h1 {
           font-size: 2.25em;
           font-weight: 300;
           color: #fff;
           letter-spacing: -3.5px;
-          margin-top: 37.5px;
-          margin-left: 2.5px;
+          margin: 0;
+          padding: 0;
           @include variables.center;
           cursor: pointer;
           @media #{variables.$mq-670} {
