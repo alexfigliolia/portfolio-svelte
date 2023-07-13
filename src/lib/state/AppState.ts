@@ -8,8 +8,7 @@ export const rawWidth = writable(1000);
 export const loading = writable(true);
 export const menuOpen = writable(false);
 export const entryDelay = writable(1500);
-export const frameClasses = writable("frame shrink");
-export const flipController = writable("flip-controller flip-active");
+export const flipController = writable("flip-controller shrink flip-active");
 export const shrinkDuration = derived(rawWidth, width => {
   return FrameController.setShrinkDuration(width);
 });
@@ -22,20 +21,12 @@ export class AppState {
 
 	public static timers = new Set<ReturnType<typeof setTimeout>>()
 
-	public static flip() {
-		if(!get(frameClasses).endsWith("flip-active")) {
-			loading.update(() => true)
-			frameClasses.update(() => "frame shrink");
-			flipController.update(() =>  "flip-controller flip-active")
-		}
-	}
-
 	public static enter() {
-			frameClasses.update(() => "frame");
-			flipController.update(() =>  "flip-controller");
-			this.defer(() => {
-				loading.update(() => false);
-			}, 1000)
+		flipController.update(() => "flip-controller shrink");
+		loading.update(() => false);
+		this.defer(() => {
+			flipController.update(() => "flip-controller");
+		}, 1000)
 	}
 
 	public static toggleMenu() {
@@ -56,25 +47,22 @@ export class AppState {
 
 	public static navigate (timeout: number, loader: () => Promise<void>) {
 		this.defer(() => {
-			frameClasses.update(() => "frame shrink")
+			flipController.update(() => "flip-controller shrink")
+			this.defer(() => {
+				loading.update(() => true);
+				flipController.update(() => "flip-controller shrink flip-active");
+				this.defer(async () => {
+					await loader();
+					this.defer(() => {
+						loading.update(() => false);
+						flipController.update(() => "flip-controller shrink");
+						this.defer(() => {
+							flipController.update(() => "flip-controller");
+						}, get(flipDuration))
+					}, 1000);
+				}, get(flipDuration));
+			}, get(shrinkDuration));
 		}, timeout);
-		const TTS = (timeout + get(shrinkDuration));
-		this.defer(() => {
-			loading.update(() => true);
-			flipController.update(() => "flip-controller flip-active");
-		}, TTS * 0.5);
-		const TTF = TTS + get(flipDuration);
-		this.defer(() => {
-			void loader();
-		}, TTF);
-		const TTU = TTF + get(flipDuration);
-		this.defer(() => {
-			frameClasses.update(() => "frame");
-			flipController.update(() => "flip-controller");
-		}, TTU);
-		this.defer(() => {
-			loading.update(() => false);
-		}, TTU + get(flipDuration))
 	}
 
 	public static defer(cb: () => void | Promise<void>, time: number) {
