@@ -57,7 +57,9 @@ export class AppState {
       flipController.update(() => "flip-controller shrink");
       this.TaskQueue.defer(() => {
         flipController.update(() => "flip-controller shrink flip-active");
-        loading.update(() => true);
+        this.TaskQueue.defer(() => {
+          loading.update(() => true);
+        }, get(flipDuration) / 2)
         this.TaskQueue.defer(() => {
           void loader().then(() => {
             this.TaskQueue.defer(() => {
