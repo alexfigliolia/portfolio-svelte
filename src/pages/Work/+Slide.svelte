@@ -44,7 +44,8 @@
 
 <div
   class={active && pageLoaded ? "project is-selected" : "project"}
-  style="height: {$height}; width: {$width};">
+  style="height: {$height}; width: {$width};"
+>
   <div class="center-stuff" style="height: {$height}; width: {$width};">
     <img src={SlideState.img} alt={name} />
     <div>
@@ -72,11 +73,14 @@
         <button class="scroller" on:click={scroll} data-direction="left">
           <img alt="View previous project" style="margin-left: 0%; margin-right: 10%;" src={Left} />
         </button>
-        <SlideBorderButton
-          {url}
-          text="VISIT"
-          active={active && pageLoaded}
-          func={SlideState.visit.bind(SlideState)} />
+        {#if !!url}
+          <SlideBorderButton
+            {url}
+            text="VISIT"
+            active={active && pageLoaded}
+            func={SlideState.visit.bind(SlideState)}
+          />
+        {/if}
         <button class="scroller" on:click={scroll} data-direction="right">
           <img alt="View next project" style="margin-left: 10%; margin-right: 0%;" src={Right} />
         </button>
@@ -297,7 +301,7 @@
     }
   }
 
-  .project:nth-of-type(1) > .center-stuff::after {
+  .project:nth-of-type(3) > .center-stuff::after {
     content: "";
     position: absolute;
     top: 0;
@@ -313,7 +317,7 @@
     }
   }
 
-  .project:nth-of-type(2) > .center-stuff::after {
+  .project:nth-of-type(4) > .center-stuff::after {
     content: "";
     position: absolute;
     top: 0;
@@ -329,7 +333,7 @@
     }
   }
 
-  .project:nth-of-type(3) > .center-stuff::after {
+  .project:nth-of-type(5) > .center-stuff::after {
     content: "";
     position: absolute;
     top: 0;
@@ -345,7 +349,7 @@
     }
   }
 
-  .project:nth-of-type(4) > .center-stuff::after {
+  .project:nth-of-type(6) > .center-stuff::after {
     content: "";
     position: absolute;
     top: 0;
@@ -361,7 +365,7 @@
     }
   }
 
-  .project:nth-of-type(5) > .center-stuff::after {
+  .project:nth-of-type(7) > .center-stuff::after {
     content: "";
     position: absolute;
     top: 0;
@@ -377,7 +381,7 @@
     }
   }
 
-  .project:nth-of-type(6) > .center-stuff::after {
+  .project:nth-of-type(8) > .center-stuff::after {
     content: "";
     position: absolute;
     top: 0;
@@ -393,7 +397,7 @@
     }
   }
 
-  .project:nth-of-type(7) > .center-stuff::after {
+  .project:nth-of-type(9) > .center-stuff::after {
     content: "";
     position: absolute;
     top: 0;
@@ -409,7 +413,7 @@
     }
   }
 
-  .project:nth-of-type(10) > .center-stuff::after {
+  .project:nth-of-type(13) > .center-stuff::after {
     content: "";
     position: absolute;
     top: 0;

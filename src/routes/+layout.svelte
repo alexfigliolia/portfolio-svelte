@@ -7,6 +7,7 @@
   import Menu from "$lib/components/Menu.svelte";
   import { get } from "svelte/store";
   import { onMount } from "svelte";
+  import { Preloader } from "$lib/Preloader";
 
   let currentPage: any = null;
   class LayoutState {
@@ -48,6 +49,7 @@
       AppState.TaskQueue.defer(() => {
         AppState.enter();
         entryDelay.update(() => 600);
+        Preloader.initialize();
       }, get(entryDelay));
     }
     return () => {

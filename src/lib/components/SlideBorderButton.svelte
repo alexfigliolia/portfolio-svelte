@@ -134,7 +134,8 @@
   on:touchmove={ButtonState.touchMove.bind(ButtonState)}
   style="box-shadow: {boxShadow}; transition-duration: {bTransDur}; transform: rotateX({rotX}deg) rotateY({rotY}deg) skew(-5deg) scale({scale});"
   data-page="Work"
-  data-url={url || null}>
+  data-url={url || null}
+>
   <h3>{text}</h3>
 </button>
 
@@ -144,8 +145,9 @@
   .three-dee-button {
     outline: none;
     border: none;
-    height: 45px;
-    width: 110px;
+    padding: 0;
+    height: 50px;
+    width: 120px;
     z-index: 10;
     background: transparent;
     transform: skew(-5deg);
@@ -164,7 +166,7 @@
     &::after {
       content: "";
       position: absolute;
-      top: 0;
+      top: 0px;
       left: 0;
       width: 0%;
       height: 2px;
@@ -184,10 +186,11 @@
       pointer-events: none;
     }
     & > h3 {
-      height: 45px;
-      width: 120px;
       margin: 0;
-      padding: 20px 25px;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
       color: transparent;
       z-index: 2;
       user-select: none;
@@ -206,8 +209,8 @@
       &::before {
         content: "";
         position: absolute;
-        top: 23%;
-        left: 0;
+        top: 2.5px;
+        left: 10%;
         width: 2px;
         height: 0%;
         z-index: 3;
@@ -218,8 +221,8 @@
       &::after {
         content: "";
         position: absolute;
-        bottom: 21%;
-        right: 0;
+        bottom: 0;
+        right: 10%;
         width: 2px;
         height: 0%;
         z-index: 3;
