@@ -44,8 +44,7 @@
 
 <div
   class={active && pageLoaded ? "project is-selected" : "project"}
-  style="height: {$height}; width: {$width};"
->
+  style="height: {$height}; width: {$width};">
   <div class="center-stuff" style="height: {$height}; width: {$width};">
     <img src={SlideState.img} alt={name} />
     <div>
@@ -62,37 +61,24 @@
       <div class={SlideState.infoClasses}>
         <p>
           {p1}
-          <button on:click={SlideState.switchText.bind(SlideState)}
-            >&nbsp;More Info</button
-          >
+          <button on:click={SlideState.switchText.bind(SlideState)}>&nbsp;More Info</button>
         </p>
         <p class={rawWidth < 957 ? "text-switch" : ""}>
           {p2}
-          <button on:click={SlideState.switchText.bind(SlideState)}
-            >&nbsp;Back</button
-          >
+          <button on:click={SlideState.switchText.bind(SlideState)}>&nbsp;Back</button>
         </p>
       </div>
       <div class="slide-buttons">
         <button class="scroller" on:click={scroll} data-direction="left">
-          <img
-            alt="View previous project"
-            style="margin-left: 0%; margin-right: 10%;"
-            src={Left}
-          />
+          <img alt="View previous project" style="margin-left: 0%; margin-right: 10%;" src={Left} />
         </button>
         <SlideBorderButton
           {url}
           text="VISIT"
           active={active && pageLoaded}
-          func={SlideState.visit.bind(SlideState)}
-        />
+          func={SlideState.visit.bind(SlideState)} />
         <button class="scroller" on:click={scroll} data-direction="right">
-          <img
-            alt="View next project"
-            style="margin-left: 10%; margin-right: 0%;"
-            src={Right}
-          />
+          <img alt="View next project" style="margin-left: 10%; margin-right: 0%;" src={Right} />
         </button>
       </div>
     </div>
@@ -322,11 +308,7 @@
     background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.35) 80%);
     background-size: cover;
     @media #{variables.$mq-670} {
-      background: linear-gradient(
-        to bottom,
-        rgba(#000, 0),
-        rgba(#000, 0.5) 80%
-      );
+      background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.5) 80%);
       background-size: cover;
     }
   }
@@ -342,11 +324,7 @@
     background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.35) 80%);
     background-size: cover;
     @media #{variables.$mq-670} {
-      background: linear-gradient(
-        to bottom,
-        rgba(#000, 0),
-        rgba(#000, 0.4) 80%
-      );
+      background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.4) 80%);
       background-size: cover;
     }
   }
@@ -362,11 +340,7 @@
     background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.35) 80%);
     background-size: cover;
     @media #{variables.$mq-670} {
-      background: linear-gradient(
-        to bottom,
-        rgba(#000, 0),
-        rgba(#000, 0.35) 90%
-      );
+      background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.35) 90%);
       background-size: cover;
     }
   }
@@ -382,11 +356,7 @@
     background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.35) 80%);
     background-size: cover;
     @media #{variables.$mq-670} {
-      background: linear-gradient(
-        to bottom,
-        rgba(#000, 0),
-        rgba(#000, 0.4) 90%
-      );
+      background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.4) 90%);
       background-size: cover;
     }
   }
@@ -399,18 +369,10 @@
     z-index: 2;
     height: 100%;
     width: 100%;
-    background: linear-gradient(
-      to bottom,
-      rgba(#000, 0),
-      rgba(#000, 0.35) 100%
-    );
+    background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.35) 100%);
     background-size: cover;
     @media #{variables.$mq-670} {
-      background: linear-gradient(
-        to bottom,
-        rgba(#000, 0),
-        rgba(#000, 0.4) 90%
-      );
+      background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.4) 90%);
       background-size: cover;
     }
   }
@@ -426,11 +388,7 @@
     background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.45) 90%);
     background-size: cover;
     @media #{variables.$mq-670} {
-      background: linear-gradient(
-        to bottom,
-        rgba(#000, 0),
-        rgba(#000, 0.35) 90%
-      );
+      background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.35) 90%);
       background-size: cover;
     }
   }
@@ -446,11 +404,7 @@
     background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.4) 90%);
     background-size: cover;
     @media #{variables.$mq-670} {
-      background: linear-gradient(
-        to bottom,
-        rgba(#000, 0),
-        rgba(#000, 0.5) 90%
-      );
+      background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.5) 90%);
       background-size: cover;
     }
   }
@@ -466,11 +420,7 @@
     background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.3) 90%);
     background-size: cover;
     @media #{variables.$mq-670} {
-      background: linear-gradient(
-        to bottom,
-        rgba(#000, 0),
-        rgba(#000, 0.25) 80%
-      );
+      background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.25) 80%);
       background-size: cover;
     }
   }
@@ -546,11 +496,7 @@
     background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.3) 60%);
     background-size: cover;
     @media #{variables.$mq-670} {
-      background: linear-gradient(
-        to bottom,
-        rgba(#000, 0),
-        rgba(#000, 0.25) 50%
-      );
+      background: linear-gradient(to bottom, rgba(#000, 0), rgba(#000, 0.25) 50%);
       background-size: cover;
     }
   }

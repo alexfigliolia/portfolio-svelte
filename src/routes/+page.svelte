@@ -4,17 +4,12 @@
   import IntroText from "$lib/components/IntroText.svelte";
   import { onMount } from "svelte";
   import { browser } from "$app/environment";
-  import {
-    AppState,
-    entryDelay,
-    flipDuration,
-    shrinkDuration,
-  } from "$lib/state/AppState";
-  import { get } from "svelte/store";
+  import { AppState } from "$lib/state/AppState";
 
   class HomeState {
     static classes = "home";
     static activateText = false;
+    static buttonActive = false;
 
     public static navigate() {
       window.location.hash = "Work";
@@ -22,12 +17,15 @@
   }
 
   onMount(() => {
-    AppState.defer(() => {
-      HomeState.classes = "home home-show";
-      HomeState.activateText = true;
+    AppState.TaskQueue.registerTask(() => {
       if (browser) {
+        HomeState.classes = "home home-show";
+        HomeState.activateText = true;
+        AppState.TaskQueue.defer(() => {
+          HomeState.buttonActive = true;
+        }, 1500);
         // @ts-ignore
-        Promise.all([import("jquery"), import("ripples")]).then(
+        void Promise.all([import("jquery"), import("ripples")]).then(
           // @ts-ignore
           ([{ default: JQ }]) => {
             JQ("#home").ripples({
@@ -38,7 +36,7 @@
           },
         );
       }
-    }, get(flipDuration) + get(shrinkDuration) + get(entryDelay));
+    });
   });
 </script>
 
@@ -48,14 +46,15 @@
 </svelte:head>
 
 <section class={HomeState.classes} id="home">
-  <BackgroundText text={"Alex"} active={HomeState.activateText} />
-  <BackgroundText text={"Figliolia"} active={HomeState.activateText} />
+  <BackgroundText text="Alex" active={HomeState.activateText} />
+  <BackgroundText text="Figliolia" active={HomeState.activateText} />
   <div>
     <IntroText active={HomeState.activateText} />
     <BorderButton
       text="Work"
-      func={HomeState.navigate.bind(HomeState)}
       active={HomeState.activateText}
+      disabled={!HomeState.buttonActive}
+      func={HomeState.navigate.bind(HomeState)}
     />
   </div>
 </section>

@@ -1,13 +1,6 @@
 <script lang="ts">
   import "./styles.scss";
-  import {
-    AppState,
-    entryDelay,
-    flipController,
-    height,
-    menuOpen,
-    page,
-  } from "$lib/state/AppState";
+  import { AppState, entryDelay, flipController, height, page } from "$lib/state/AppState";
   import { browser } from "$app/environment";
   import Loader from "$lib/components/Loader.svelte";
   import Header from "$lib/components/Header.svelte";
@@ -34,20 +27,13 @@
 
     public static getRoute() {
       const nextRoute =
-        (window.location.hash.slice(
-          1,
-        ) as keyof typeof LayoutState.navigators) || "Home";
+        (window.location.hash.slice(1) as keyof typeof LayoutState.navigators) || "Home";
       page.update(() => nextRoute);
       return LayoutState.navigators[nextRoute];
     }
 
     public static navigate() {
-      let timeout = 0;
-      if ($menuOpen) {
-        AppState.toggleMenu();
-        timeout = 800;
-      }
-      AppState.navigate(timeout, this.getRoute());
+      AppState.navigate(this.getRoute());
     }
   }
 
@@ -58,18 +44,14 @@
       window.addEventListener("resize", () => {
         AppState.setDimensions();
       });
-      window.addEventListener(
-        "hashchange",
-        LayoutState.navigate.bind(LayoutState),
-        true,
-      );
-      AppState.defer(() => {
+      window.addEventListener("hashchange", LayoutState.navigate.bind(LayoutState), true);
+      AppState.TaskQueue.defer(() => {
         AppState.enter();
         entryDelay.update(() => 600);
       }, get(entryDelay));
     }
     return () => {
-      AppState.popTimers();
+      AppState.TaskQueue.popTimers();
     };
   });
 </script>
@@ -106,7 +88,7 @@
     background-color: #fff;
     @include variables.center;
     opacity: 0;
-    animation: opacity 0.25s 1s forwards;
+    animation: opacity 0.5s 1s forwards;
     perspective: 1000px;
     transform-style: preserve-3d;
     position: fixed;

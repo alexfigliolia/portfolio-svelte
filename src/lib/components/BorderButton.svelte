@@ -4,6 +4,7 @@
   export let url = "";
   export let text = "";
   export let active = false;
+  export let disabled = false;
   export let func: (event: MouseEvent) => void;
 
   let classes = "three-dee-button";
@@ -59,11 +60,8 @@
       };
     }
 
-    private static setFrame(
-      rotation: { rotX: number; rotY: number },
-      duration: number,
-    ) {
-      if (!active) {
+    private static setFrame(rotation: { rotX: number; rotY: number }, duration: number) {
+      if (!active || disabled) {
         return;
       }
       rotX = rotation.rotX;
@@ -76,7 +74,7 @@
     }
 
     public static mouseEnter({ clientX, clientY, target }: MouseEvent) {
-      if (!active) {
+      if (!active || disabled) {
         return;
       }
       this.cacheTargetData(target as HTMLButtonElement);
@@ -90,7 +88,7 @@
     }
 
     public static touchStart({ target, touches }: TouchEvent) {
-      if (!active) {
+      if (!active || disabled) {
         return;
       }
       this.cacheTargetData(target as HTMLButtonElement);
@@ -136,16 +134,19 @@
 <button
   class={classes}
   on:click={func}
+  {disabled}
   on:mouseenter={ButtonState.mouseEnter.bind(ButtonState)}
   on:mousemove={ButtonState.mouseMove.bind(ButtonState)}
   on:mouseleave={ButtonState.mouseLeave.bind(ButtonState)}
   on:touchstart={ButtonState.touchStart.bind(ButtonState)}
   on:touchend={ButtonState.mouseLeave.bind(ButtonState)}
   on:touchmove={ButtonState.touchMove.bind(ButtonState)}
-  style="box-shadow: {boxShadow}; transition-duration: {bTransDur}; transform: rotateX({rotX}deg) rotateY({rotY}deg) skew(-5deg) scale({scale});"
+  style="
+    box-shadow: {boxShadow}; 
+    transition-duration: {bTransDur}; 
+    transform: rotateX({rotX}deg) rotateY({rotY}deg) skew(-5deg) scale({scale});"
   data-page="Work"
-  data-url={url || null}
->
+  data-url={url || null}>
   <h3>{text}</h3>
 </button>
 
@@ -268,8 +269,7 @@
       pointer-events: initial;
       &:hover {
         transform: scale(1.1) skew(-5deg);
-        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.35),
-          0 6px 6px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.35), 0 6px 6px rgba(0, 0, 0, 0.5);
         &::after {
           height: 100%;
           transition-delay: 0s;

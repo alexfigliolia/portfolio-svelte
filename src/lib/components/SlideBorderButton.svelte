@@ -61,10 +61,7 @@
       };
     }
 
-    private static setFrame(
-      rotation: { rotX: number; rotY: number },
-      duration: number,
-    ) {
+    private static setFrame(rotation: { rotX: number; rotY: number }, duration: number) {
       rotX = rotation.rotX;
       rotY = rotation.rotY;
       bTransDur = `${duration}s`;
@@ -137,8 +134,7 @@
   on:touchmove={ButtonState.touchMove.bind(ButtonState)}
   style="box-shadow: {boxShadow}; transition-duration: {bTransDur}; transform: rotateX({rotX}deg) rotateY({rotY}deg) skew(-5deg) scale({scale});"
   data-page="Work"
-  data-url={url || null}
->
+  data-url={url || null}>
   <h3>{text}</h3>
 </button>
 

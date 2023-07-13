@@ -15,8 +15,7 @@
             fill="none"
             stroke="#fff"
             stroke-width="2"
-            stroke-miterlimit="10"
-          />
+            stroke-miterlimit="10" />
         </svg>
       </div>
     </div>

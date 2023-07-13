@@ -6,12 +6,9 @@
 <h2 class={`bg-text ${active ? "active" : ""}`}>
   {#each text.split("") as letter, index}
     <div
-      style={`transition: transform 0.5s ${
+      style={`transition: transform 0.5s ${2 + (index * index) / 100}s, opacity 0.5s ${
         2 + (index * index) / 100
-      }s, opacity 0.5s ${
-        2 + (index * index) / 100
-      }s, color 0.3s 0s, text-shadow 0.3s 0s;`}
-    >
+      }s, color 0.3s 0s, text-shadow 0.3s 0s;`}>
       {letter}
     </div>
   {/each}
@@ -63,8 +60,7 @@
         color: rgba(#fff, 0.9);
         text-shadow: 0px 2.5px 5px #000, 0px 5px 10px #000;
         @media #{variables.$mq-670} {
-          text-shadow: 0px 2.5px 5px #000, 0px 5px 10px #000,
-            0px 7.5px 15px #000;
+          text-shadow: 0px 2.5px 5px #000, 0px 5px 10px #000, 0px 7.5px 15px #000;
         }
       }
     }

@@ -2,12 +2,7 @@
   import { browser } from "$app/environment";
   import BackgroundText from "$lib/components/BackgroundText.svelte";
   import ContactBorderButton from "$lib/components/ContactBorderButton.svelte";
-  import {
-    AppState,
-    entryDelay,
-    flipDuration,
-    shrinkDuration,
-  } from "$lib/state/AppState";
+  import { AppState, entryDelay, flipDuration, shrinkDuration } from "$lib/state/AppState";
   import { onMount } from "svelte";
   import { get } from "svelte/store";
   import ContactText from "./+ContactText.svelte";
@@ -26,10 +21,10 @@
   }
 
   onMount(() => {
-    AppState.defer(() => {
+    AppState.TaskQueue.registerTask(() => {
       Contact.classes = "contact contact-show";
       Contact.textActive = true;
-      AppState.defer(() => {
+      AppState.TaskQueue.defer(() => {
         Contact.classes = "contact contact-show";
       }, 750);
       if (browser) {
@@ -45,9 +40,14 @@
           },
         );
       }
-    }, get(flipDuration) + get(shrinkDuration) + get(entryDelay));
+    });
   });
 </script>
+
+<svelte:head>
+  <title>Contact</title>
+  <meta name="description" content="Alex Figliolia's Portfolio" />
+</svelte:head>
 
 <section id="contact" class={Contact.classes}>
   <BackgroundText text="Alex" active={Contact.textActive} />
@@ -55,11 +55,7 @@
   <div>
     <ContactText active={Contact.textActive} />
     <div class="contact-buttons">
-      <ContactBorderButton
-        text="Call Me"
-        active={Contact.textActive}
-        func={() => {}}
-      />
+      <ContactBorderButton text="Call Me" active={Contact.textActive} func={() => {}} />
       <ContactBorderButton
         text="Email Me"
         active={Contact.textActive}

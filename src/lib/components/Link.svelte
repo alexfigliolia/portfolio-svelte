@@ -20,30 +20,22 @@
 </script>
 
 <button
-  class={`link ${$page === pageTo ? "on-page" : ""} ${
-    $menuOpen ? "menu-open" : ""
-  }`}
+  class={`link ${$page === pageTo ? "on-page" : ""} ${$menuOpen ? "menu-open" : ""}`}
   on:touchstart={Link.onTouchStart.bind(Link)}
   on:touchend={Link.onTouchEnd.bind(Link)}
   on:mouseenter={Link.onTouchStart.bind(Link)}
   on:mouseleave={Link.onTouchEnd.bind(Link)}
-  on:click={Link.navigate.bind(Link)}
->
+  on:click={Link.navigate.bind(Link)}>
   {#each pageTo.split("") as letter, i}
     <div
       class="link-letter"
-      style="transition-delay: {($menuOpen || Link.hovered ? 0 : 0.3) +
-        i / 20}s"
-    >
+      style="transition-delay: {($menuOpen || Link.hovered ? 0 : 0.3) + i / 20}s">
       {letter}
     </div>
   {/each}
   <div class="inner">
     {#each pageTo.split("") as letter, i}
-      <div
-        style="transition-delay: {($menuOpen || Link.hovered ? 0 : 0.3) +
-          i / 20}s"
-      >
+      <div style="transition-delay: {($menuOpen || Link.hovered ? 0 : 0.3) + i / 20}s">
         {letter}
       </div>
     {/each}

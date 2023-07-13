@@ -1,19 +1,11 @@
 <script lang="ts">
   import { browser } from "$app/environment";
-  import {
-    AppState,
-    entryDelay,
-    flipDuration,
-    height,
-    shrinkDuration,
-    width,
-  } from "$lib/state/AppState";
+  import { AppState, height, width } from "$lib/state/AppState";
   import { onMount } from "svelte";
   import Controls from "./+Controls.svelte";
   import Slide from "./+Slide.svelte";
   import API from "./API";
   import PageSwitch, { type PageSwitch as PW } from "pageswitch";
-  import { get } from "svelte/store";
 
   class WorkState {
     static PW: PW;
@@ -53,9 +45,7 @@
     width.subscribe(() => {
       WorkState.rawWidth = window.innerWidth;
       if (WorkState.PW) {
-        WorkState.PW.setTransition(
-          window.innerWidth > 957 ? "flip3d" : "flip3dY",
-        );
+        WorkState.PW.setTransition(window.innerWidth > 957 ? "flip3d" : "flip3dY");
       }
     });
     if (browser) {
@@ -63,12 +53,17 @@
       WorkState.PW.on("after", () => {
         WorkState.selectedIndex = WorkState.PW.current;
       });
-      AppState.defer(() => {
+      AppState.TaskQueue.registerTask(() => {
         WorkState.pageLoaded = true;
-      }, get(flipDuration) + get(shrinkDuration) + get(entryDelay));
+      });
     }
   });
 </script>
+
+<svelte:head>
+  <title>Work</title>
+  <meta name="description" content="Alex Figliolia's Portfolio" />
+</svelte:head>
 
 <div class="work-wrapper" style="height: {$height}; width: {$width};">
   <div style="height: {$height}; width: {$width};">
